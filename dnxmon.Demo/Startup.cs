@@ -1,20 +1,15 @@
-﻿using System;
+using System;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Diagnostics;
 using Microsoft.AspNet.Diagnostics.Entity;
 using Microsoft.AspNet.Hosting;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Routing;
-using Microsoft.AspNet.Security.Cookies;
-using Microsoft.Data.Entity;
 using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
-using Microsoft.Framework.Logging.Console;
-using kmon.Demo.Models;
+using dnxmon.Demo.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace kmon.Demo
+namespace dnxmon.Demo
 {
     public class Startup
     {
@@ -32,12 +27,12 @@ namespace kmon.Demo
         public void ConfigureServices(IServiceCollection services)
         {
             // Add EF services to the services container.
-            services.AddEntityFramework(Configuration)
+            services.AddEntityFramework()
                 .AddInMemoryStore()
                 .AddDbContext<ApplicationDbContext>();
 
             // Add Identity services to the services container.
-            services.AddDefaultIdentity<ApplicationDbContext, ApplicationUser, IdentityRole>(Configuration);
+            services.AddIdentity<ApplicationUser, IdentityRole>();
 
             // Add MVC services to the services container.
             services.AddMvc();

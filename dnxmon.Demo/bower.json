@@ -1,5 +1,5 @@
 {
-    "name": "kmon.Demo",
+    "name": "dnxmon.Demo",
     "private": true,
     "dependencies": {
         "bootstrap": "~3.0.0",

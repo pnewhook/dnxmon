@@ -1,0 +1,19 @@
+{
+  "version": "0.4.0",
+  "authors": [
+    "Shayne Boyer",
+    "Glenn F. Henriksen",
+    "Peter Newhook"
+  ],
+  "description": "A dnx-command for running 'dnx web' or 'dnx kestrel' wrapped in nodemon.",
+  "dependencies": {},
+  "frameworks": {
+    "dnx451": {},
+    "dnxcore50": {
+      "dependencies": {
+        "System.Diagnostics.Process": "4.0.0-beta-*",
+        "System.Console": "4.0.0-*"
+      }
+    }
+  }
+}

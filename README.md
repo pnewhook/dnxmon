@@ -6,7 +6,7 @@ web server, or console application, whenever a change is detected. Main use is w
 
 ## Add Kestrelmon to your project: 
 
-`kpm install Kestrelmon` to install from Nuget.org
+`kpm install dnx` to install from Nuget.org
 
 Add a `mon` command to your project.json file: 
 
@@ -17,7 +17,7 @@ Add a `mon` command to your project.json file:
     "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --server.urls http://localhost:5000",
     "gen": "Microsoft.Framework.CodeGeneration",
     "ef": "EntityFramework.Commands",
-    "mon" : "Kestrelmon --ext cs,json,js --server web"
+    "mon" : "dnxmon --ext cs,json,js --server web"
 },
 ```
 
@@ -29,11 +29,9 @@ Add a `mon` command to your project.json file:
   },
 ```
 
-From the command line, run `k mon`. It's pronounced *"kuh-mon"*. 
+From the command line, run `dnx mon`. 
 
-You can call it something else than `mon`, but then you can't shout out "kuh-mon!" when you run it. 
-
-Kestrelmon passes parameters on to nodemon so `--ext cs,json,js` are nodemon parameters telling it to watch files ending in 
+dnxmon passes parameters on to nodemon so `--ext cs,json,js` are nodemon parameters telling it to watch files ending in 
 one of those extensions. The `--server` parameter is used to specify the necessary hosting client.  Specify `web` for Windows and `kestrel` for OSX, Linux.
 
 If either `--ext` or `--server` is not specified the default are shown above.

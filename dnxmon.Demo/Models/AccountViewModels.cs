@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
-namespace kmon.Demo.Models
+namespace dnxmon.Demo.Models
 {
     public class ExternalLoginConfirmationViewModel
     {

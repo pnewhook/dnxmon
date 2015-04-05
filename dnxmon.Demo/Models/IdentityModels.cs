@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Metadata;
 using Microsoft.Framework.OptionsModel;
 
-namespace kmon.Demo.Models
+namespace dnxmon.Demo.Models
 {
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
@@ -30,9 +30,9 @@ namespace kmon.Demo.Models
             }
         }
         
-        protected override void OnConfiguring(DbContextOptions options)
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            options.UseSqlServer();
+            options.UseSqlServer("Data:DefaultConnection:ConnectionString");
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

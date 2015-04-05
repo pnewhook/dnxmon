@@ -1,13 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
-using kmon.Demo.Models;
+using dnxmon.Demo.Models;
+using Microsoft.AspNet.Authorization;
+using System.Security.Claims;
 
-namespace kmon.Demo.Controllers
+namespace dnxmon.Demo.Controllers
 {
     [Authorize]
     public class AccountController : Controller
@@ -40,15 +42,14 @@ namespace kmon.Demo.Controllers
             if (ModelState.IsValid)
             {
                 var signInStatus = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
-                switch (signInStatus)
+                
+                if (signInStatus.Succeeded)
                 {
-                    case SignInStatus.Success:
-                        return RedirectToLocal(returnUrl);
-                    case SignInStatus.Failure:
-                    default:
-                        ModelState.AddModelError("", "Invalid username or password.");
-                        return View(model);
+                    return RedirectToLocal(returnUrl);    
                 }
+                
+                ModelState.AddModelError("", "Invalid username or password.");
+                return View(model);
             }
 
             // If we got this far, something failed, redisplay form
@@ -144,13 +145,13 @@ namespace kmon.Demo.Controllers
         {
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError("", error);
+                ModelState.AddModelError("", error.Description);
             }
         }
 
         private async Task<ApplicationUser> GetCurrentUserAsync()
         {
-            return await UserManager.FindByIdAsync(Context.User.Identity.GetUserId());
+            return await UserManager.FindByIdAsync(User.GetUserId());
         }
 
         public enum ManageMessageId
